@@ -6,6 +6,7 @@ import (
 	"runtime"
 	"sync"
 	"time"
+	"github.com/kusora/raven-go"
 )
 
 type Logger struct {
@@ -31,7 +32,7 @@ func time33(s string) int64 {
 }
 
 func (l *Logger) header(tm time.Time, file string, line int, s string) string {
-	lid := 100000 + time33(s)%10000
+	lid := 100000 + time33(s) % 10000
 	return fmt.Sprintf("%s %d %s file %s line %d ", tm.Format("2006-01-02 15:04:05"), lid, l.prefix, file, line)
 }
 
