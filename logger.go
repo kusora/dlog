@@ -50,6 +50,13 @@ func Info(format string, v ...interface{}) {
 	}
 }
 
+func InfoC(format string, v ...interface{}) {
+	if Level >= INFO {
+		lg.Output(2, fmt.Sprintf("[INFO] " + format, v...))
+	}
+	raven.CaptureMessage(fmt.Sprintf(format, v...), nil)
+}
+
 func Println(v ...interface{}) {
 	lg.Output(2, fmt.Sprint(v...))
 }
@@ -117,7 +124,7 @@ func Fatalln(v ...interface{}) {
 	}
 
 	if SentryLevel >= FATAL && hasSentry {
-		raven.CaptureMessage("fatal", nil, v...)
+		raven.CaptureMessage(fmt.Sprintf("fatal, %+v", v), nil)
 	}
 }
 

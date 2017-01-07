@@ -6,7 +6,6 @@ import (
 	"runtime"
 	"sync"
 	"time"
-	"github.com/kusora/raven-go"
 )
 
 type Logger struct {
